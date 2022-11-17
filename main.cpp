@@ -13,19 +13,19 @@ void pruningGrafo(){
 void friendshipDijsktra(){
 
 }
-void influencersMarvels(){
+void influencersMarvel(){
 
 }
 
-void main(){
+int main(){
     int option;
     do{
         cout<<"El universo de Marvel"<<endl;
-        cout<<"1. ¿Cuáles son los personajes con menos y más conexiones en el universo Marvel?"<<endl;
-        cout<<"2. Implementar los recorridos de anchura y profundidad de un personaje a otro."<<endl;
-        cout<<"3. Realizar un “pruning” del grafo, quitando a los personajes qué tengan menos de “n” conexiones que se le pida al usuario."<<endl;
-        cout<<"4. Utilizando el valor de friendship debes de realizar el recorrido de Dijsktra para llegar de un personaje a otro."<<endl;
-        cout<<"5. Identificar a los personajes qué son influencers en el universo Marvel, una lista de esos influencers ordenada de mayor a menor según su número de relaciones."<<endl;
+        cout<<"1. Los personajes con menos y más conexiones en el universo Marvel"<<endl;
+        cout<<"2. Anchura y profundidad de un personaje a otro"<<endl;
+        cout<<"3. Pruning del grafo"<<endl;
+        cout<<"4. Recorrido de Dijsktra para llegar de un personaje a otro"<<endl;
+        cout<<"5. Influencers en el universo Marvel, de mayor a menor segun su numero de relaciones"<<endl;
         cin>>option;
         switch (option)
         {
