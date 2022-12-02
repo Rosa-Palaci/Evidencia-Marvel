@@ -24,9 +24,12 @@ private:
     }
 
 public:
-    Hashtable(int size = 20) {
+    Hashtable(int size = 23000) {
         this->size = size;
         tabla = new LinkedList<HashPair<K, T>>[size];
+        for (int i = 0; i < size; i++) {
+			tabla[i] = LinkedList<HashPair<K, T> *>();
+		}
     }
     int elementsSize() const {
         int n = 0;
@@ -44,14 +47,18 @@ public:
                 indice = i;
             }
         }
-        tabla[posicion].addLast(HashPair<K, T>(key, value));
+        if(indice >=0){
+            lista.get(indice)->value = value;
+        } else {
+            tabla[posicion].addLast(HashPair<K, T>(key, value));
+        }
         return (indice >= 0) ? 0 : 1;
     }
-
+    //Complejidad: O(n^2)
     T getOrDefault(K key, const T DEFAULT_VALUE) const {
         int posicion = fh(key);
-        LinkedList<HashPair<K, T>> lista = tabla[posicion];
-        int i = 0;
+        LinkedList<HashPair<K, T>*> lista = tabla[posicion];
+        int indice = -1;
         for (int i = 0; i < lista.size(); i++) {
             if (lista.get(i).key == key)
                 return lista.get(i).value;
@@ -76,7 +83,10 @@ public:
         }
         return false;
     }
-
+    bool is_empty() {
+		return tabla->is_empty();
+	}
+    //Complejidad: O(n^2)
     bool contains(K key) const {
         int posicion = fh(key);
         LinkedList<HashPair<K, T> *> lista = tabla[posicion];
@@ -91,7 +101,7 @@ public:
     LinkedList<K> keys() const {
         vector<K> ks;
         for (int i = 0; i < size; i++) {
-            for (int j = 0; j < tabla[i].size(); j++) {
+            for (int j = 0; j < tabla[i].size(); j++) { //O(n^2)
                 K key = tabla[i].get(j).key;
                 if (!count(ks.begin(), ks.end(), key))
                     ks.push_back(key);
@@ -133,4 +143,11 @@ public:
             cout << count << "\n";
         }
     }
+    int hashSize() {
+		int nElements = 0;
+		for (int i = 0; i < size; i++) {
+			nElements += tabla[i].size();
+		}
+		return nElements;
+	}
 };
